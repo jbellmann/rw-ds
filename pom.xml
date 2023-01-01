@@ -6,14 +6,30 @@
   <artifactId>rw-ds-parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>rw-ds-parent</name>
-  <description>rw-ds</description>
   <packaging>pom</packaging>
+  <description>Read-Write-DataSource Configuration for Spring-Boot</description>
+  <url>https://github.com/jbellmann/rw-ds</url>
+  <inceptionYear>2023</inceptionYear>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Jörg Bellmann</name>
+      <email>joerg.bellmann@googlemail.com</email>
+    </developer>
+  </developers>
 
   <properties>
     <maven.compiler.target>${compiler.target.version}</maven.compiler.target>
     <maven.compiler.source>${compiler.source.version}</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <testcontainers.version>1.17.6</testcontainers.version>
+    <junit-jupiter.version>5.9.1</junit-jupiter.version>
   </properties>
 
   <modules>
@@ -24,6 +40,13 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit-jupiter.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
@@ -52,12 +75,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M7</version>
+          <version>2.22.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <version>3.0.0-M7</version>
+          <version>2.22.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -97,39 +120,110 @@
     </plugins>
   </build>
 
+  <scm>
+    <url>https://github.com/jbellmann/rw-ds</url>
+    <connection>scm:git:git@github.com:jbellmann/rw-ds.git</connection>
+    <developerConnection>scm:git:git@github.com:jbellmann/rw-ds.git</developerConnection>
+  </scm>
+
   <profiles>
     <profile>
       <id>spring-boot-3</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
         <compiler.target.version>17</compiler.target.version>
         <compiler.source.version>17</compiler.source.version>
         <spring.boot.version>3.0.1</spring.boot.version>
-        <jooq.version>3.17.6</jooq.version>
       </properties>
     </profile>
     <profile>
       <id>spring-boot-2</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
         <compiler.target.version>11</compiler.target.version>
         <compiler.source.version>11</compiler.source.version>
-        <spring.boot.version>2.7.6</spring.boot.version>
-        <jooq.version>3.14.16</jooq.version>
+        <spring.boot.version>2.7.7</spring.boot.version>
       </properties>
     </profile>
     <profile>
       <id>examples</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <modules>
         <module>examples</module>
       </modules>
     </profile>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.2.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.3.2</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>3.0.1</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.12</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+              <stagingProgressTimeoutMinutes>10</stagingProgressTimeoutMinutes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 </project>

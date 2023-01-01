@@ -1,6 +1,6 @@
 spring:
   application:
-    name: read-write-hibernate
+    name: read-write-hibernate-spring-boot-3
 
   flyway:
     schemas:

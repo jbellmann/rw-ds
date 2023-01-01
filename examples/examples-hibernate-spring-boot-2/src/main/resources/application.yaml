@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: read-write-hibernate-spring-boot-2
+
+  flyway:
+    schemas:
+      - stores
