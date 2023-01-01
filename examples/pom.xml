@@ -24,6 +24,20 @@
     <module>examples-test-support</module>
     <module>examples-jooq-code-generation</module>
     <module>examples-jooq</module>
-    <module>examples-hibernate</module>
   </modules>
+
+  <profiles>
+    <profile>
+      <id>spring-boot-3</id>
+      <modules>
+        <module>examples-hibernate-spring-boot-3</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>spring-boot-2</id>
+      <modules>
+        <module>examples-hibernate-spring-boot-2</module>
+      </modules>
+    </profile>
+  </profiles>
 </project>
