@@ -6,8 +6,23 @@
   <artifactId>rw-ds-parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>rw-ds-parent</name>
-  <description>rw-ds</description>
   <packaging>pom</packaging>
+  <description>Read-Write-DataSource Configuration for Spring-Boot</description>
+  <url>https://github.com/jbellmann/rw-ds</url>
+  <inceptionYear>2023</inceptionYear>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Jörg Bellmann</name>
+      <email>joerg.bellmann@googlemail.com</email>
+    </developer>
+  </developers>
 
   <properties>
     <maven.compiler.target>${compiler.target.version}</maven.compiler.target>
@@ -97,39 +112,73 @@
     </plugins>
   </build>
 
+  <scm>
+    <url>https://github.com/jbellmann/rw-ds</url>
+    <connection>scm:git:git@github.com:jbellmann/rw-ds.git</connection>
+    <developerConnection>scm:git:git@github.com:jbellmann/rw-ds.git</developerConnection>
+  </scm>
+
   <profiles>
     <profile>
       <id>spring-boot-3</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
         <compiler.target.version>17</compiler.target.version>
         <compiler.source.version>17</compiler.source.version>
         <spring.boot.version>3.0.1</spring.boot.version>
-        <jooq.version>3.17.6</jooq.version>
       </properties>
     </profile>
     <profile>
       <id>spring-boot-2</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
         <compiler.target.version>11</compiler.target.version>
         <compiler.source.version>11</compiler.source.version>
         <spring.boot.version>2.7.7</spring.boot.version>
-        <jooq.version>3.14.16</jooq.version>
       </properties>
     </profile>
     <profile>
       <id>examples</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <modules>
         <module>examples</module>
       </modules>
+    </profile>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>3.0.1</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.12</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+              <stagingProgressTimeoutMinutes>10</stagingProgressTimeoutMinutes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 </project>

@@ -29,12 +29,18 @@
   <profiles>
     <profile>
       <id>spring-boot-3</id>
+      <properties>
+        <jooq.version>3.17.6</jooq.version>
+      </properties>
       <modules>
         <module>examples-hibernate-spring-boot-3</module>
       </modules>
     </profile>
     <profile>
       <id>spring-boot-2</id>
+      <properties>
+        <jooq.version>3.14.16</jooq.version>
+      </properties>
       <modules>
         <module>examples-hibernate-spring-boot-2</module>
       </modules>
