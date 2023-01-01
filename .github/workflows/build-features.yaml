@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        profile: ['spring-boot-3', 'spring-boot-2']
+        profile: ['spring-boot-3,examples', 'spring-boot-2']
 
     steps:
       - name: Checkout
