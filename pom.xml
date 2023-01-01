@@ -118,7 +118,7 @@
       <properties>
         <compiler.target.version>11</compiler.target.version>
         <compiler.source.version>11</compiler.source.version>
-        <spring.boot.version>2.7.6</spring.boot.version>
+        <spring.boot.version>2.7.7</spring.boot.version>
         <jooq.version>3.14.16</jooq.version>
       </properties>
     </profile>
