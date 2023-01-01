@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>de.jbellmann.rwds</groupId>
+    <artifactId>rw-ds-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>examples</artifactId>
+  <name>examples</name>
+  <packaging>pom</packaging>
+
+  <properties>
+    <postgressql.version>42.5.1</postgressql.version>
+
+    <maven.deploy.skip>true</maven.deploy.skip>
+  </properties>
+
+  <modules>
+    <module>examples-migrations</module>
+    <module>examples-common</module>
+    <module>examples-test-support</module>
+    <module>examples-jooq-code-generation</module>
+    <module>examples-jooq</module>
+    <module>examples-hibernate</module>
+  </modules>
+</project>

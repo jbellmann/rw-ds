@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: read-write-jooq
+
+  flyway:
+    schemas:
+      - stores

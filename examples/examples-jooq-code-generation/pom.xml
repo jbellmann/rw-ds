@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>de.jbellmann.rwds</groupId>
+    <artifactId>examples</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>examples-jooq-code-generation</artifactId>
+  <name>examples-jooq-code-generation</name>
+
+  <properties>
+    <docker-maven-plugin.version>0.40.2</docker-maven-plugin.version>
+
+    <database.host>localhost</database.host>
+    <database.port>5432</database.port>
+    <database.name>postgres</database.name>
+    <database.user>postgres</database.user>
+    <database.password>postgres</database.password>
+
+    <maven.deploy.skip>true</maven.deploy.skip>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>de.jbellmann.rwds</groupId>
+      <artifactId>examples-migrations</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jooq</groupId>
+      <artifactId>jooq</artifactId>
+      <version>${jooq.version}</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>${project.build.directory}/generated-sources/jooq</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>${docker-maven-plugin.version}</version>
+        <configuration>
+          <images>
+            <image>
+              <name>postgres:latest</name>
+              <alias>postgres</alias>
+              <run>
+                <env>
+                  <POSTGRES_USER>postgres</POSTGRES_USER>
+                  <POSTGRES_PASSWORD>postgres</POSTGRES_PASSWORD>
+                </env>
+                <ports>
+                  <port>${database.port}:${database.port}</port>
+                </ports>
+                <wait>
+                  <log>database system is ready to accept connections</log>
+                  <!--<time>3000</time>-->
+                </wait>
+                <log>
+                  <enabled>true</enabled>
+                  <prefix>DB__</prefix>
+                  <color>red</color>
+                </log>
+              </run>
+            </image>
+          </images>
+        </configuration>
+        <executions>
+          <execution>
+            <id>prepare-generate-environment</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>remove-generate-environment</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default</id>
+            <goals>
+              <goal>migrate</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <locations>
+                <location>classpath:db/migration</location>
+              </locations>
+              <url>jdbc:postgresql://${database.host}:${database.port}/${database.name}</url>
+              <driver>org.postgresql.Driver</driver>
+              <user>${database.user}</user>
+              <password>${database.password}</password>
+              <!--<defaultSchema>public</defaultSchema>-->
+              <schemas>
+                <schema>stores</schema>
+              </schemas>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgressql.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.jooq</groupId>
+        <artifactId>jooq-codegen-maven</artifactId>
+        <version>${jooq.version}</version>
+        <executions>
+          <execution>
+            <id>jooq-codegen</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <jdbc>
+            <driver>org.postgresql.Driver</driver>
+            <url>jdbc:postgresql://${database.host}:${database.port}/${database.name}</url>
+            <user>${database.user}</user>
+            <password>${database.password}</password>
+          </jdbc>
+          <generator>
+            <name>org.jooq.codegen.DefaultGenerator</name>
+            <strategy>
+              <name>org.jooq.codegen.DefaultGeneratorStrategy</name>
+            </strategy>
+            <generate>
+              <fluentSetters>false</fluentSetters>
+              <deprecated>false</deprecated>
+            </generate>
+            <database>
+              <name>org.jooq.meta.postgres.PostgresDatabase</name>
+              <inputSchema>stores</inputSchema>
+              <excludes>FLYWAY_SCHEMA_HISTORY</excludes>
+              <properties>
+                <!-- The default schema for unqualified objects:
+                     - public: all unqualified objects are located in the PUBLIC (upper case) schema
+                     - none: all unqualified objects are located in the default schema (default)
+                     This configuration can be overridden with the schema mapping feature -->
+                <property>
+                  <key>unqualifiedSchema</key>
+                  <value>none</value>
+                </property>
+
+                <!-- The default name case for unquoted objects:
+                     - as_is: unquoted object names are kept unquoted
+                     - upper: unquoted object names are turned into upper case (most databases)
+                     - lower: unquoted object names are turned into lower case (e.g. PostgreSQL) -->
+                <property>
+                  <key>defaultNameCase</key>
+                  <value>lower</value>
+                </property>
+              </properties>
+            </database>
+            <target>
+              <packageName>readwrite</packageName>
+              <directory>${project.build.directory}/generated-sources/jooq</directory>
+            </target>
+          </generator>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgressql.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-sources/jooq</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
