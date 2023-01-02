@@ -33,6 +33,7 @@
 
     <sonar.organization>jbellmann</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/rw-ds-autoconfigure/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
   </properties>
 
   <modules>

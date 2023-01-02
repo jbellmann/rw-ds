@@ -10,7 +10,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.DefaultTransactionStatus;
 
-public class ReadWriteAwareTransactionManagerTest {
+class ReadWriteAwareTransactionManagerTest {
 
   @Test
   void testDelegation() {

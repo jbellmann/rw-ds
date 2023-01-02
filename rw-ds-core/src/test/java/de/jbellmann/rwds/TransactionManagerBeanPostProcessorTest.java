@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.transaction.PlatformTransactionManager;
 
-public class TransactionManagerBeanPostProcessorTest {
+class TransactionManagerBeanPostProcessorTest {
 
   @Test
   void testBeanPostProcessor() {
