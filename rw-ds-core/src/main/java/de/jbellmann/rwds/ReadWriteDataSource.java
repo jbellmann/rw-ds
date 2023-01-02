@@ -31,7 +31,7 @@ public class ReadWriteDataSource extends AbstractRoutingDataSource {
     return dataSourceType;
   }
 
-  private enum Type {
+  protected enum Type {
     READ,
     WRITE
   }
