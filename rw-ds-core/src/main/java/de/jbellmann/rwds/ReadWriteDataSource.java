@@ -8,10 +8,10 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 @Slf4j
 public class ReadWriteDataSource extends AbstractRoutingDataSource {
-  private static final ThreadLocal<Type> currentDataSource = new ThreadLocal<Type>();
+  protected static final ThreadLocal<Type> currentDataSource = new ThreadLocal<>();
 
   public ReadWriteDataSource(DataSource writeDataSource, DataSource readDataSource) {
-    Map<Object, Object> dataSourceMap = new HashMap<Object, Object>(2);
+    Map<Object, Object> dataSourceMap = new HashMap<>(2);
     dataSourceMap.put(Type.READ, readDataSource);
     dataSourceMap.put(Type.WRITE, writeDataSource);
 
