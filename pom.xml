@@ -37,6 +37,7 @@
   </properties>
 
   <modules>
+    <module>rw-ds-test-support</module>
     <module>rw-ds-core</module>
     <module>rw-ds-autoconfigure</module>
     <module>rw-ds-spring-boot-starter</module>

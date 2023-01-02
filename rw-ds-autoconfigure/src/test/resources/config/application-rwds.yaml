@@ -1,0 +1,17 @@
+
+rwds:
+  datasource:
+    write:
+      driver-class-name: org.postgresql.Driver
+      configuration:
+        maximum-pool-size: 5
+
+    read:
+      driver-class-name: org.postgresql.Driver
+      configuration:
+        maximum-pool-size: 5
+
+logging:
+  level:
+    de.jbellmann.rwds: DEBUG
+

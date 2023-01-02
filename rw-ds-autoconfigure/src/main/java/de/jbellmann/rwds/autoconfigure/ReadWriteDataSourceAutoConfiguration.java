@@ -28,6 +28,7 @@ public class ReadWriteDataSourceAutoConfiguration {
   public static final String RWDS_READ_DATA_SOURCE_PROPERTIES_BEAN = "rwdsReadDataSourceProperties";
   public static final String RWDS_WRITE_DATA_SOURCE_BEAN = "rwdsWriteDataSource";
   public static final String RWDS_READ_DATA_SOURCE_BEAN = "rwdsReadDataSource";
+  public static final String RWDS_DATA_SOURCE_BEAN = "rwdsDataSource";
 
   @Primary
   @Bean(name = RWDS_WRITE_DATA_SOURCE_PROPERTIES_BEAN)
@@ -65,7 +66,7 @@ public class ReadWriteDataSourceAutoConfiguration {
   }
 
   @Primary
-  @Bean(name = "rwdsDataSource")
+  @Bean(name = RWDS_DATA_SOURCE_BEAN)
   public DataSource routingDataSource(
       @Qualifier(RWDS_WRITE_DATA_SOURCE_BEAN) DataSource writeDataSource,
       @Qualifier(RWDS_READ_DATA_SOURCE_BEAN) DataSource readDataSource
