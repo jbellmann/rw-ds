@@ -1,10 +1,10 @@
 # Read-Write-DataSource Spring-Boot Starter
 
+[![Maven Central](https://img.shields.io/maven-central/v/de.jbellmann.rwds/rw-ds-parent.svg)](https://maven-badges.herokuapp.com/maven-central/de.jbellmann.rwds/rw-ds-parent)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/jbellmann/rw-ds/main/LICENSE)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jbellmann_rw-ds&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jbellmann_rw-ds)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=jbellmann_rw-ds&metric=coverage)](https://sonarcloud.io/summary/new_code?id=jbellmann_rw-ds)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=jbellmann_rw-ds&metric=bugs)](https://sonarcloud.io/summary/new_code?id=jbellmann_rw-ds)
-[![Maven Central](https://img.shields.io/maven-central/v/de.jbellmann.rwds/rw-ds-parent.svg)](https://maven-badges.herokuapp.com/maven-central/de.jbellmann.rwds/rw-ds-parent)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/jbellmann/rw-ds/main/LICENSE)
 
 ## Installation
 
@@ -25,6 +25,7 @@ Supports:
 ## Configuration
 
 The library follows spring-boots howto [configuring multiple datasources](https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.data-access.configure-two-datasources).
+
 Configuration section respects settings for [HikariCP](https://github.com/brettwooldridge/HikariCP#frequently-used).
 
 ```yaml
@@ -61,8 +62,8 @@ This project provides some example applications.
 ## Build
 
 This project uses [Build Profiles](https://maven.apache.org/guides/introduction/introduction-to-profiles.html) to support different versions of spring-boot.
-- spring-boot-2 (build against Spring-Boot version 2.7.x, active by default)
-- spring-boot-3 (build against Spring-Boot version 3.0.x)
+- [spring-boot-2](https://github.com/jbellmann/rw-ds/blob/main/pom.xml#L145) (build against Spring-Boot version 2.7.x, active by default)
+- [spring-boot-3](https://github.com/jbellmann/rw-ds/blob/main/pom.xml#L134) (build against Spring-Boot version 3.0.x)
 - examples (enables `examples` sub-modules to be build too)
 
 ```shell
@@ -78,7 +79,7 @@ This project uses [Build Profiles](https://maven.apache.org/guides/introduction/
 ```
 
 ```shell
-./mvnw verify -Pspring-boot-3,examples # will activate spring-boot-2 profile, activates examples modules to be build
+./mvnw verify -Pspring-boot-3,examples # will activate spring-boot-3 profile, activates examples modules to be build
 ```
 
 :warning: `examples`-modules contain integration tests spawning PostgreSQL instances in [Docker](https://www.docker.com/) via [TestContainers](https://testcontainers.org). A working Docker installation is required to be in place.
