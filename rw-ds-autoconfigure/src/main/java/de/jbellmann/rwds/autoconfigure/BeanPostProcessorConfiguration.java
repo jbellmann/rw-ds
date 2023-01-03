@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnReadWriteDataSourceConfigProperties
 public class BeanPostProcessorConfiguration {
   @Bean
-  public static TransactionManagerBeanPostProcessor transactionManagerBeanPostProcessor() {
+  static TransactionManagerBeanPostProcessor transactionManagerBeanPostProcessor() {
     return new TransactionManagerBeanPostProcessor();
   }
 
