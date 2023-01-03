@@ -16,15 +16,16 @@ public class ReadWritePostgresInitializer implements
     ApplicationContextInitializer<ConfigurableApplicationContext> {
 
   static Network network = Network.newNetwork();
+  public static final String POSTGRES = "postgres";
   static GenericContainer<?> writePostgres = new GenericContainer<>(
       DockerImageName.parse("bitnami/postgresql:14"))
       .withEnv(Map.of(
           "POSTGRESQL_REPLICATION_MODE", "master",
           "POSTGRESQL_REPLICATION_USER", "repl_user",
           "POSTGRESQL_REPLICATION_PASSWORD", "repl_password",
-          "POSTGRESQL_USERNAME", "postgres",
-          "POSTGRESQL_PASSWORD", "postgres",
-          "POSTGRESQL_DATABASE", "postgres",
+          "POSTGRESQL_USERNAME", POSTGRES,
+          "POSTGRESQL_PASSWORD", POSTGRES,
+          "POSTGRESQL_DATABASE", POSTGRES,
           "ALLOW_EMPTY_PASSWORD", "yes"
       ))
       .withExposedPorts(5432)
@@ -39,8 +40,8 @@ public class ReadWritePostgresInitializer implements
           "POSTGRESQL_REPLICATION_PASSWORD", "repl_password",
           "POSTGRESQL_MASTER_HOST", "postgresql-write",
           "POSTGRESQL_MASTER_PORT", "5432",
-          "POSTGRESQL_USERNAME", "postgres",
-          "POSTGRESQL_PASSWORD", "postgres",
+          "POSTGRESQL_USERNAME", POSTGRES,
+          "POSTGRESQL_PASSWORD", POSTGRES,
           "ALLOW_EMPTY_PASSWORD", "yes"
       ))
       .withExposedPorts(5432)
@@ -53,11 +54,11 @@ public class ReadWritePostgresInitializer implements
 
     return Map.of(
         "rwds.datasource.write.url", String.format(urlTemplate, writePostgres.getMappedPort(5432)),
-        "rwds.datasource.write.username", "postgres",
-        "rwds.datasource.write.password", "postgres",
+        "rwds.datasource.write.username", POSTGRES,
+        "rwds.datasource.write.password", POSTGRES,
         "rwds.datasource.read.url", String.format(urlTemplate, readPostgres.getMappedPort(5432)),
-        "rwds.datasource.read.username", "postgres",
-        "rwds.datasource.read.password", "postgres"
+        "rwds.datasource.read.username", POSTGRES,
+        "rwds.datasource.read.password", POSTGRES
     );
   }
 
