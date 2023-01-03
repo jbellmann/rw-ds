@@ -1,9 +1,11 @@
 package de.jbellmann.rwds.autoconfigure;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import de.jbellmann.rwds.initializers.ReadWritePostgresInitializer;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -17,9 +19,15 @@ import org.springframework.test.context.ContextConfiguration;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class ReadWriteDataSourceTest {
 
+  @Autowired
+  private RwdsProperties rwdsProperties;
+
   @Test
   void contextLoads() {
-    Assertions.assertTrue(true);
+    // configured in `application-rwds.yaml`
+    assertTrue(rwdsProperties.getTransactionManagerCustomizations().isValidateExistingTransaction());
+    // defaults to 'true'
+    assertTrue(rwdsProperties.getTransactionManagerCustomizations().isGlobalRollbackOnParticipationFailure());
   }
 
 }

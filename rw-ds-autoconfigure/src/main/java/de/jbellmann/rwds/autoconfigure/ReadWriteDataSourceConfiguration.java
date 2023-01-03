@@ -2,7 +2,6 @@ package de.jbellmann.rwds.autoconfigure;
 
 import com.zaxxer.hikari.HikariDataSource;
 import de.jbellmann.rwds.ReadWriteDataSource;
-import de.jbellmann.rwds.TransactionManagerBeanPostProcessor;
 import de.jbellmann.rwds.autoconfigure.conditions.ConditionalOnReadWriteDataSourceConfigProperties;
 import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +15,7 @@ import org.springframework.context.annotation.Primary;
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnReadWriteDataSourceConfigProperties
-public class ReadWriteDataSourceAutoConfiguration {
+public class ReadWriteDataSourceConfiguration {
 
   public static final String PROPERTY_RWDS_DS_WRITE = "rwds.datasource.write";
   public static final String PROPERTY_RWDS_DS_READ = "rwds.datasource.read";
@@ -73,14 +72,5 @@ public class ReadWriteDataSourceAutoConfiguration {
   ) {
     log.debug("Create ReadWriteDataSource ...");
     return new ReadWriteDataSource(writeDataSource, readDataSource);
-  }
-
-  @Configuration
-  @ConditionalOnReadWriteDataSourceConfigProperties
-  static class BeanPostProcessorConfiguration {
-    @Bean
-    public static TransactionManagerBeanPostProcessor transactionManagerBeanPostProcessor() {
-      return new TransactionManagerBeanPostProcessor();
-    }
   }
 }

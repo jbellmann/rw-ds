@@ -1,5 +1,7 @@
 
 rwds:
+  transaction-manager-customizations:
+    validateExistingTransaction: true
   datasource:
     write:
       driver-class-name: org.postgresql.Driver
@@ -14,4 +16,3 @@ rwds:
 logging:
   level:
     de.jbellmann.rwds: DEBUG
-
