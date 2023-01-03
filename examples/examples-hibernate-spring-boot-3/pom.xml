@@ -47,6 +47,11 @@
 
     <dependency>
       <groupId>de.jbellmann.rwds</groupId>
+      <artifactId>rw-ds-test-support</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>de.jbellmann.rwds</groupId>
       <artifactId>examples-test-support</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>

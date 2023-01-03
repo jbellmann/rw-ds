@@ -13,11 +13,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener;
-import org.springframework.boot.logging.LogLevel;
 import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
-public class ReadWriteDataSourceAutoConfigurationTest {
+class ReadWriteDataSourceAutoConfigurationTest {
 
   private final ApplicationContextRunner runner = new ApplicationContextRunner();
 
@@ -37,12 +36,12 @@ public class ReadWriteDataSourceAutoConfigurationTest {
 
 
   @Test
-  @Disabled
+  @Disabled("Have to investigate, how this can be tested with ApplicationContextRunner")
   void conditionOnReadWriteDataSourceDoesMatch() {
     ApplicationContextRunner runner = new ApplicationContextRunner()
         .withInitializer(new ReadWritePostgresInitializer())
         .withInitializer(new ConfigDataApplicationContextInitializer())
-        .withInitializer(new ConditionEvaluationReportLoggingListener(LogLevel.DEBUG))
+        .withInitializer(new ConditionEvaluationReportLoggingListener())
         .withPropertyValues("spring.config.location=classpath:/config/application-rwds.yaml")
         .withConfiguration(AutoConfigurations.of(ReadWriteDataSourceAutoConfiguration.class));
     runner
