@@ -12,7 +12,7 @@ import org.springframework.transaction.support.AbstractPlatformTransactionManage
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnReadWriteDataSourceConfigProperties
 @EnableConfigurationProperties({RwdsProperties.class})
-public class TransactionManagerCustomizersConfiguration {
+class TransactionManagerCustomizersConfiguration {
   @Bean
   PlatformTransactionManagerCustomizer<AbstractPlatformTransactionManager> setValidateTransaction(RwdsProperties rwdsProperties) {
     log.info("Set 'validateExistingTransaction' to '{}' via customizer ...", rwdsProperties.getTransactionManagerCustomizations().isValidateExistingTransaction());

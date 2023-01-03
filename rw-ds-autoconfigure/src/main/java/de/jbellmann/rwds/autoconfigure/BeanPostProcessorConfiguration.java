@@ -5,9 +5,9 @@ import de.jbellmann.rwds.autoconfigure.conditions.ConditionalOnReadWriteDataSour
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnReadWriteDataSourceConfigProperties
-public class BeanPostProcessorConfiguration {
+class BeanPostProcessorConfiguration {
   @Bean
   static TransactionManagerBeanPostProcessor transactionManagerBeanPostProcessor() {
     return new TransactionManagerBeanPostProcessor();
