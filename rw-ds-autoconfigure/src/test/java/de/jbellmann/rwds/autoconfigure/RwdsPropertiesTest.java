@@ -8,7 +8,7 @@ import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.support.AbstractPlatformTransactionManager;
 import org.springframework.transaction.support.DefaultTransactionStatus;
 
-public class RwdsPropertiesTest {
+class RwdsPropertiesTest {
 
   @Test
   void verifyAbstractTransactionManagerDefaults() {
