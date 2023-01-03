@@ -1,1 +1,3 @@
-de.jbellmann.rwds.autoconfigure.ReadWriteDataSourceAutoConfiguration
+de.jbellmann.rwds.autoconfigure.ReadWriteDataSourceConfiguration
+de.jbellmann.rwds.autoconfigure.BeanPostProcessorConfiguration
+de.jbellmann.rwds.autoconfigure.TransactionManagerCustomizersConfiguration

@@ -1,6 +1,6 @@
 package de.jbellmann.rwds.autoconfigure.conditions;
 
-import de.jbellmann.rwds.autoconfigure.ReadWriteDataSourceAutoConfiguration;
+import de.jbellmann.rwds.autoconfigure.ReadWriteDataSourceConfiguration;
 import org.springframework.boot.autoconfigure.condition.AllNestedConditions;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
@@ -10,9 +10,9 @@ public class OnReadWriteDataSourceConfigProperties extends AllNestedConditions {
     super(ConfigurationPhase.REGISTER_BEAN);
   }
 
-  @ConditionalOnProperty(prefix = ReadWriteDataSourceAutoConfiguration.PROPERTY_RWDS_DS_WRITE, name = "url")
+  @ConditionalOnProperty(prefix = ReadWriteDataSourceConfiguration.PROPERTY_RWDS_DS_WRITE, name = "url")
   static class OnRwdsWriteDataSourceUrl {}
 
-  @ConditionalOnProperty(prefix = ReadWriteDataSourceAutoConfiguration.PROPERTY_RWDS_DS_READ, name = "url")
+  @ConditionalOnProperty(prefix = ReadWriteDataSourceConfiguration.PROPERTY_RWDS_DS_READ, name = "url")
   static class OnRwdsReadDataSourceUrl {}
 }
