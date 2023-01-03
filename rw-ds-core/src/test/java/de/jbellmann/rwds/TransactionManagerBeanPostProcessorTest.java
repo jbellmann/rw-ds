@@ -25,6 +25,11 @@ class TransactionManagerBeanPostProcessorTest {
     processedBean = postProcessor.postProcessAfterInitialization(mockedTransactionManager, "jpaTransactionManager");
     Assertions.assertNotSame(mockedTransactionManager, processedBean);
     Assertions.assertInstanceOf(ReadWriteAwareTransactionManager.class, processedBean);
+
+    PlatformTransactionManager allreadyPostProcessedBean = (PlatformTransactionManager) processedBean;
+    processedBean = postProcessor.postProcessAfterInitialization(processedBean, "readWriteAwareTransactionManager");
+    Assertions.assertSame(allreadyPostProcessedBean, processedBean);
+    Assertions.assertInstanceOf(ReadWriteAwareTransactionManager.class, processedBean);
   }
 
 }
