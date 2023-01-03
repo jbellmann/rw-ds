@@ -1,6 +1,6 @@
 package hibernate;
 
-import example.support.initializers.ReadWritePostgresInitializer;
+import de.jbellmann.rwds.initializers.ReadWritePostgresInitializer;
 import example.support.test.ClientRunner;
 import example.support.test.ClientRunnerResult;
 import lombok.extern.slf4j.Slf4j;

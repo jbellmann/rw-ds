@@ -33,9 +33,11 @@
 
     <sonar.organization>jbellmann</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../rw-ds-autoconfigure/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
   </properties>
 
   <modules>
+    <module>rw-ds-test-support</module>
     <module>rw-ds-core</module>
     <module>rw-ds-autoconfigure</module>
     <module>rw-ds-spring-boot-starter</module>
@@ -70,6 +72,11 @@
   <build>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.8</version>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
