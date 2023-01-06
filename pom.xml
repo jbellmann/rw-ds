@@ -32,7 +32,6 @@
     <junit-jupiter.version>5.9.1</junit-jupiter.version>
 
     <sonar.organization>jbellmann</sonar.organization>
-    <sonar.projectKey>jbellmann_rw-ds</sonar.projectKey>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../rw-ds-jacoco/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <sonar.java.libraries>${env.HOME}/.m2/repository/org/projectlombok/lombok/**/*.jar</sonar.java.libraries>
