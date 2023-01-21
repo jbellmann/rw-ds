@@ -30,7 +30,7 @@
     <profile>
       <id>spring-boot-3</id>
       <properties>
-        <jooq.version>3.17.6</jooq.version>
+        <jooq.version>3.17.7</jooq.version>
       </properties>
       <modules>
         <module>examples-hibernate-spring-boot-3</module>
