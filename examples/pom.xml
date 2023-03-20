@@ -13,7 +13,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <postgressql.version>42.5.4</postgressql.version>
+    <postgressql.version>42.6.0</postgressql.version>
 
     <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
