@@ -147,7 +147,7 @@
       <properties>
         <compiler.target.version>17</compiler.target.version>
         <compiler.source.version>17</compiler.source.version>
-        <spring.boot.version>3.0.3</spring.boot.version>
+        <spring.boot.version>3.0.5</spring.boot.version>
       </properties>
     </profile>
     <profile>
