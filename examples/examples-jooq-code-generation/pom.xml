@@ -58,8 +58,8 @@
                   <port>${database.port}:${database.port}</port>
                 </ports>
                 <wait>
-                  <log>database system is ready to accept connections</log>
-                  <!--<time>3000</time>-->
+                  <!-- <log>database system is ready to accept connections</log> -->
+                  <time>10000</time>
                 </wait>
                 <log>
                   <enabled>true</enabled>
