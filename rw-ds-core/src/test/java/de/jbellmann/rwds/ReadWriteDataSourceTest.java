@@ -1,6 +1,5 @@
 package de.jbellmann.rwds;
 
-import de.jbellmann.rwds.ReadWriteDataSource.Type;
 import javax.sql.DataSource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,12 +13,12 @@ class ReadWriteDataSourceTest {
     DataSource writeDs = Mockito.mock(DataSource.class);
     ReadWriteDataSource rwds = new ReadWriteDataSource(writeDs, readDs);
 
-    Assertions.assertNull(rwds.determineCurrentLookupKey());
+    Assertions.assertNotNull(rwds.determineCurrentLookupKey());
     ReadWriteDataSource.setReadOnlyDataSource(true);
-    Assertions.assertSame(Type.READ, rwds.determineCurrentLookupKey());
+    Assertions.assertSame(TransactionType.READ, rwds.determineCurrentLookupKey());
     ReadWriteDataSource.setReadOnlyDataSource(false);
-    Assertions.assertNotSame(Type.READ, rwds.determineCurrentLookupKey());
-    Assertions.assertSame(Type.WRITE, rwds.determineCurrentLookupKey());
+    Assertions.assertNotSame(TransactionType.READ, rwds.determineCurrentLookupKey());
+    Assertions.assertSame(TransactionType.WRITE, rwds.determineCurrentLookupKey());
   }
 
 }
