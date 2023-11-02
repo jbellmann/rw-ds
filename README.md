@@ -20,7 +20,7 @@ Add the following dependency to your project:
 
 Supports:
 - Spring-Boot 2.7.x
-- Spring-Boot 3.0.x
+- Spring-Boot 3.1.x
 
 ## Configuration
 
