@@ -156,7 +156,7 @@
     <profile>
       <id>spring-boot-3</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
         <compiler.target.version>17</compiler.target.version>
@@ -167,7 +167,7 @@
     <profile>
       <id>spring-boot-2</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
         <compiler.target.version>11</compiler.target.version>
