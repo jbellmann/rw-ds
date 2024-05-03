@@ -39,7 +39,7 @@
     <profile>
       <id>spring-boot-2</id>
       <properties>
-        <jooq.version>3.14.16</jooq.version>
+        <jooq.version>3.19.8</jooq.version>
       </properties>
       <modules>
         <module>examples-hibernate-spring-boot-2</module>
