@@ -18,7 +18,7 @@ public class ReadWritePostgresInitializer implements
   static Network network = Network.newNetwork();
   public static final String POSTGRES = "postgres";
   static GenericContainer<?> writePostgres = new GenericContainer<>(
-      DockerImageName.parse("bitnami/postgresql:14"))
+      DockerImageName.parse("bitnami/postgresql:16"))
       .withEnv(Map.of(
           "POSTGRESQL_REPLICATION_MODE", "master",
           "POSTGRESQL_REPLICATION_USER", "repl_user",
@@ -33,7 +33,7 @@ public class ReadWritePostgresInitializer implements
       .withNetworkAliases("postgresql-write");
 
   static GenericContainer<?> readPostgres = new GenericContainer<>(
-      DockerImageName.parse("bitnami/postgresql:14"))
+      DockerImageName.parse("bitnami/postgresql:16"))
       .withEnv(Map.of(
           "POSTGRESQL_REPLICATION_MODE", "slave",
           "POSTGRESQL_REPLICATION_USER", "repl_user",
