@@ -12,7 +12,7 @@
   <name>examples-jooq-code-generation</name>
 
   <properties>
-    <docker-maven-plugin.version>0.44.0</docker-maven-plugin.version>
+    <docker-maven-plugin.version>0.45.1</docker-maven-plugin.version>
 
     <database.host>localhost</database.host>
     <database.port>5432</database.port>
@@ -21,6 +21,8 @@
     <database.password>postgres</database.password>
 
     <maven.deploy.skip>true</maven.deploy.skip>
+
+    <jooq.version>3.19.16</jooq.version>
   </properties>
 
   <dependencies>
@@ -117,6 +119,11 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgressql.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>10.22.0</version>
           </dependency>
         </dependencies>
       </plugin>

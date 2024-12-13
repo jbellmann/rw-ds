@@ -19,7 +19,7 @@ class ReadWriteAwareTransactionManagerTest {
 
     DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
     transactionDefinition.setName("TEST_TRANSACTION_DEFINITION");
-    TransactionStatus transactionStatus = new DefaultTransactionStatus("TEST_TRANSACTION", true, true, false, false, "SUSPENDED_RESOURCES");
+    TransactionStatus transactionStatus = new DefaultTransactionStatus("TEST_TRANSACTION","TEST_TRANSACTION", true, true, false, false, true, "SUSPENDED_RESOURCES");
 
     transactionManager.getTransaction(transactionDefinition);
     transactionManager.commit(transactionStatus);

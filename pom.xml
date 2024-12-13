@@ -29,7 +29,7 @@
     <maven.compiler.source>${compiler.source.version}</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <testcontainers.version>1.20.1</testcontainers.version>
-    <junit-jupiter.version>5.10.2</junit-jupiter.version>
+    <junit-jupiter.version>5.10.3</junit-jupiter.version>
     <junit-platform.version>1.9.2</junit-platform.version>
 
     <sonar.organization>jbellmann</sonar.organization>
@@ -89,7 +89,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.2.5</version>
+          <version>3.4.0</version>
           <configuration>
             <!-- set this to 0 in for easier debugging, default is 1 -->
             <!-- like : 'TestEngine with ID 'junit-jupiter' failed to discover tests' -->
@@ -106,7 +106,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <version>3.2.5</version>
+          <version>3.4.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -116,7 +116,12 @@
         <plugin>
           <groupId>org.flywaydb</groupId>
           <artifactId>flyway-maven-plugin</artifactId>
-          <version>10.13.0</version>
+          <version>10.17.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>5.0.0.4389</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -125,7 +130,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-help-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.4.1</version>
         <!-- we want this written to commandline only once -->
         <!-- so avoid execution in sub-modules -->
         <inherited>false</inherited>
@@ -161,7 +166,7 @@
       <properties>
         <compiler.target.version>17</compiler.target.version>
         <compiler.source.version>17</compiler.source.version>
-        <spring.boot.version>3.2.3</spring.boot.version>
+        <spring.boot.version>3.3.6</spring.boot.version>
       </properties>
     </profile>
     <profile>
@@ -201,7 +206,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.6.3</version>
+            <version>3.8.0</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
@@ -228,7 +233,7 @@
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
             <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.6.13</version>
+            <version>1.7.0</version>
             <extensions>true</extensions>
             <configuration>
               <serverId>ossrh</serverId>
